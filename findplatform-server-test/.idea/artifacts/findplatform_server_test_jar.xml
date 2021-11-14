@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="findplatform-server-test:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/findplatform_server_test_jar</output-path>
+    <root id="archive" name="findplatform-server-test.jar">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/src/main/res/META-INF/MANIFEST.MF" />
+      </element>
+    </root>
+  </artifact>
+</component>

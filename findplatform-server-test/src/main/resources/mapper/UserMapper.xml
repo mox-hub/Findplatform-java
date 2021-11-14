@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ming.findplatform.mapper.UserMapper">
+    <insert id="addUser" parameterType="com.ming.findplatform.model.User">
+        insert into user(id,username,password,age) values (#{id},#{username},#{password},#{age})
+    </insert>
+    <delete id="deleteUserById" parameterType="java.lang.String">
+        DELETE FROM user WHERE id=#{id}
+    </delete>
+    <update id="updateUser" parameterType="com.ming.findplatform.model.User">
+        UPDATE user set username=#{username}, password=#{password} WHERE id=#{id}
+    </update>
+    <select id="getUserById" parameterType="java.lang.String" resultType="com.ming.findplatform.model.User">
+        SELECT * FROM user WHERE id=#{id}
+    </select>
+    <select id="getAllUser" resultType="com.ming.findplatform.model.User">
+        SELECT * FROM user
+    </select>
+</mapper>
