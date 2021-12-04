@@ -2,17 +2,20 @@ package com.ming.findplatform.model;
 
 /**
  * @ClassName :User
- * @Description :
+ * @Description :用户数据的实体类
  * @Author :Mox
  * @Date :2021/11/14 17:02
- * @Version : v1.0
+ * @Version : v2.0
+ * v2.0新添加phone_number
  **/
 
+//TODO:解决phoneNumber为null的问题
 public class User {
     private String id;
     private String username;
     private String password;
     private Integer age;
+    private String phoneNumber;
 
     public String getId() {
         return id;
@@ -46,6 +49,14 @@ public class User {
         this.age = age;
     }
 
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -53,6 +64,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", age=" + age +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }
 }
