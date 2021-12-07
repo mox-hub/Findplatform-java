@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description :七牛云响应token的发放
  * @Author :Mox
  * @Date :2021/11/15 17:51
- * @Version : v1.0
+ * @Version : v1.1 接口版本v1
  **/
 
 @RestController
 public class ImgController {
-    @RequestMapping(value = "/img/getToken", method = RequestMethod.GET)
+    @RequestMapping(value = "/img/v1/getToken", method = RequestMethod.GET)
     public QiNiu getToken() {
         QiNiu qiNiu = new QiNiu();
-
+        // 七牛云图床的秘钥
         String accessKey = "oSgZW4xW6wLuys8Eib4pPs44OgQ4ihkJrn9aurMt";
         String secretKey = "EPGQHXZO62Jy1dHfQcTJPozDcnrlGR0Ss04g9WPc";
         String bucket = "moxhub";

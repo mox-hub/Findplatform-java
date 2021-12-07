@@ -12,7 +12,7 @@ import java.util.List;
  * @Description :用户部分的controller
  * @Author :Mox
  * @Date :2021/11/14 17:25
- * @Version : v1.1.2
+ * @Version : v1.2.1 接口版本v1
  **/
 
 
@@ -26,27 +26,27 @@ public class UserController {
     @Resource(name = "user")
     private UserService userService;
 
-    @PostMapping("/usr/userAdd")
+    @PostMapping("/usr/v1/userAdd")
     public int addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
-    @PostMapping("/usr/updateUser")
+    @PostMapping("/usr/v1/updateUser")
     public int updateAuth(@RequestBody User user) {
         return userService.updateUser(user);
     }
-    @PostMapping(value = "/usr/deleteUser/{id}")
+    @PostMapping(value = "/usr/v1/deleteUser/{id}")
     public int deleteUserById(@PathVariable(name = "id") String id) {
         // 删除数据
         return userService.deleteUserById(id);
     }
-    @GetMapping(value = "/usr/queryUser")
+    @GetMapping(value = "/usr/v1/queryUser")
     public User getAuthById(@RequestParam(value = "id") String id) {
         // 查询单条数据
         User user4 = userService.getUserById(id);
         System.out.println("查询1条数据>>>" + user4.toString());
         return user4;
     }
-    @GetMapping("/usr/allUser")
+    @GetMapping("/usr/v1/allUser")
     public List<User> getAllUser() {
         // 查询多条数据
         List<User> users = userService.getAllUser();
