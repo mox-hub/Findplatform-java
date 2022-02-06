@@ -26,12 +26,12 @@ public class UserController {
     @Resource(name = "user")
     private UserService userService;
 
-    @PostMapping("/usr/v1/userAdd")
+    @PostMapping("/usr/v1/addUser")
     public int addUser(@RequestBody User user) {
         return userService.addUser(user);
     }
     @PostMapping("/usr/v1/updateUser")
-    public int updateAuth(@RequestBody User user) {
+    public int updateUser(@RequestBody User user) {
         return userService.updateUser(user);
     }
     @PostMapping(value = "/usr/v1/deleteUser/{id}")

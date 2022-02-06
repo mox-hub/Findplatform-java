@@ -57,5 +57,4 @@ public class ItemController {
         List<Item> items = itemService.getAllItem();
         return items;
     }
-
 }
