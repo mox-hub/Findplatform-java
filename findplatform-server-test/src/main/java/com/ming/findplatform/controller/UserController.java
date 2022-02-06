@@ -40,7 +40,7 @@ public class UserController {
         return userService.deleteUserById(id);
     }
     @GetMapping(value = "/usr/v1/queryUser")
-    public User getAuthById(@RequestParam(value = "id") String id) {
+    public User getUserById(@RequestParam(value = "id") String id) {
         // 查询单条数据
         User user4 = userService.getUserById(id);
         System.out.println("查询1条数据>>>" + user4.toString());
