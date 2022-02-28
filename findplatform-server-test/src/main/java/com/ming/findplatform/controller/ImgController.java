@@ -1,11 +1,14 @@
 package com.ming.findplatform.controller;
 
+import com.ming.findplatform.model.Item;
 import com.ming.findplatform.model.QiNiu;
+import com.ming.findplatform.service.HttpService;
+import com.ming.findplatform.service.ItemService;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @ClassName :ImgController
@@ -17,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ImgController {
+    @Resource(name = "http")
+    private HttpService httpService;
+
     @RequestMapping(value = "/img/v1/getToken", method = RequestMethod.GET)
     public QiNiu getToken() {
         QiNiu qiNiu = new QiNiu();
@@ -33,4 +39,8 @@ public class ImgController {
         qiNiu.setUptoken(upToken);
         return qiNiu;
     };
+    @GetMapping("/img/v1/getItemInfo")
+    public String getItemInfo(@RequestParam(value = "imgUrl")String url) {
+        return httpService.getItemInfo(url);
+    }
 }
