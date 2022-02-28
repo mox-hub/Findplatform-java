@@ -26,7 +26,7 @@ public class httpServiceImpl implements HttpService {
 
     @Override
     public String getItemInfo(String imgUrl) {
-        String url = "127.0.0.1:9011?imgUrl="+imgUrl;
+        String url = "http://127.0.0.1:9011?imgUrl="+imgUrl;
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<String> entity = new HttpEntity<String>(headers);
