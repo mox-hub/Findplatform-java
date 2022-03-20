@@ -3,14 +3,14 @@ package com.ming.findplatform.model;
 import java.sql.Date;
 
 /**
- * @ClassName :Item
- * @Description :item_list对应实体类
+ * @ClassName :collect
+ * @Description :collect_list对应实体类
  * @Author :Mox
  * @Date :2021/11/19 10:02
  * @Version : v1.0
  **/
 
-public class Item {
+public class collect {
     private String itemId;
     private String imgUrl;
     private String tag;
@@ -19,8 +19,8 @@ public class Item {
     private String placement;
     private Date pickTime;
     private String userId;
-    private String itemName;
-    private String itemInfo;
+    private String item_name;
+    private String item_info;
 
     public String getItemId() {
         return itemId;
@@ -86,19 +86,19 @@ public class Item {
         this.userId = userId;
     }
 
-    public String getItemName() {
-        return itemName;
+    public String getItem_name() {
+        return item_name;
     }
 
-    public void setItemName(String itemName) {
-        this.itemName = itemName;
+    public void setItem_name(String item_name) {
+        this.item_name = item_name;
     }
 
-    public String getItemInfo() {
-        return itemInfo;
+    public String getItem_info() {
+        return item_info;
     }
 
-    public void setItemInfo(String itemInfo) { this.itemInfo = itemInfo; }
+    public void setItem_info(String item_info) { this.item_info = item_info; }
 
     @Override
     public String toString() {
@@ -111,8 +111,8 @@ public class Item {
                 ", placement='" + placement + '\'' +
                 ", pickTime=" + pickTime +
                 ", userId='" + userId + '\'' +
-                ", item_name='" + itemName + '\'' +
-                ", item_info='" + itemInfo + '\'' +
+                ", item_name='" + item_name + '\'' +
+                ", item_info='" + item_info + '\'' +
                 '}';
     }
 }

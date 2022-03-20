@@ -4,11 +4,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ming.findplatform.mapper.ItemMapper">
     <insert id="addItem" parameterType="com.ming.findplatform.model.Item">
-        insert into item_list(item_id,img_url,tag,state,pick_location,placement,pick_time,user_id)
-        values (#{itemId},#{imgUrl},#{tag},#{state},#{pickLocation},#{placement},#{pickTime},#{userId})
+        insert into item_list(item_id,img_url,tag,state,pick_location,placement,pick_time,user_id,item_name,item_info)
+        values (#{itemId},#{imgUrl},#{tag},#{state},#{pickLocation},#{placement},#{pickTime},#{userId},#{itemName},#{itemInfo})
     </insert>
     <update id="updateItem" parameterType="com.ming.findplatform.model.Item">
-        UPDATE item_list set img_url=#{imgUrl}, tag=#{tag}, state=#{state}, pick_location=#{pickLocation}, pick_time=#{pickTime}, user_id=#{userId} WHERE item_id=#{itemId}
+        UPDATE item_list set img_url=#{imgUrl}, tag=#{tag}, state=#{state}, pick_location=#{pickLocation}, pick_time=#{pickTime}, user_id=#{userId}, item_name=#{itemName}, item_info=#{itemInfo} WHERE item_id=#{itemId}
     </update>
     <delete id="deleteItemById" parameterType="java.lang.String">
         DELETE FROM item_list WHERE item_id=#{itemId}
