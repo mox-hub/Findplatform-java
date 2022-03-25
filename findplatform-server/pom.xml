@@ -3,10 +3,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ming</groupId>
-    <artifactId>findplatform-server</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <artifactId>findplatform</artifactId>
+    <version>0.3.0</version>
     <name>findplatform-server</name>
-    <description>Demo project for Spring Boot</description>
+    <description>find platform of hfut-cs group</description>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>
@@ -18,18 +19,26 @@
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jdbc</artifactId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+            <version>2.3.7.RELEASE</version>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.microsoft.sqlserver</groupId>
-            <artifactId>mssql-jdbc</artifactId>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -40,6 +49,73 @@
                     <artifactId>junit-vintage-engine</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!-- MyBatis依赖 -->
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+            <version>2.1.0</version>
+        </dependency>
+
+        <!-- 数据库驱动依赖 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <!-- 数据库连接池 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.9</version>
+        </dependency>
+
+        <!--七牛云上传相关-->
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>qiniu-java-sdk</artifactId>
+            <version>7.2.11</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>3.3.1</version>
+            <scope>compile</scope>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>com.google.code.gson</groupId>-->
+<!--            <artifactId>gson</artifactId>-->
+<!--            <version>2.6.2</version>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>com.qiniu</groupId>
+            <artifactId>happy-dns-java</artifactId>
+            <version>0.1.4</version>
+            <scope>compile</scope>
+        </dependency>
+        <!--   测试单元   -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.12</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- RestTemplate  -->
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.5.5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.60</version>
         </dependency>
     </dependencies>
 
@@ -56,7 +132,34 @@
     </dependencyManagement>
 
     <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+
+        <!--   TODO：resources这部分在complete和run时需要注释掉     -->
+<!--        <resources>-->
+<!--            &lt;!&ndash; 把src/main/resources目录下所有的文件拷贝到conf目录中 &ndash;&gt;-->
+<!--            <resource>-->
+<!--                <directory>src/main/resources</directory>-->
+<!--                <targetPath>${project.build.directory}/conf</targetPath>-->
+<!--            </resource>-->
+<!--            &lt;!&ndash; 把lib目录下所有的文件拷贝到lib目录中-->
+<!--            （可能有些jar包没有办法在maven中找到，需要放在lib目录中） &ndash;&gt;-->
+<!--            <resource>-->
+<!--                <directory>lib</directory>-->
+<!--                <targetPath>${project.build.directory}/lib</targetPath>-->
+<!--            </resource>-->
+<!--            &lt;!&ndash; 把放在根目录下的脚本文件.sh,.bat拷贝到bin目录中 &ndash;&gt;-->
+<!--            <resource>-->
+<!--                <directory>.</directory>-->
+<!--                <includes>-->
+<!--                    <include>**/*.sh</include>-->
+<!--                    <include>**/*.bat</include>-->
+<!--                </includes>-->
+<!--                <targetPath>${project.build.directory}/bin</targetPath>-->
+<!--            </resource>-->
+<!--        </resources>-->
+
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -67,12 +170,13 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <version>2.3.7.RELEASE</version>
                 <configuration>
-                    <mainClass>com.ming.findplatformserver.FindplatformServerApplication</mainClass>
+                    <mainClass>com.ming.findplatform.FindplatformServerApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

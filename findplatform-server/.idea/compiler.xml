@@ -6,11 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="findplatform-server" />
+        <module name="findplatform-server-test" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="findplatform-server" target="1.8" />
+      <module name="findplatform" target="1.8" />
+      <module name="findplatform-server-test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
