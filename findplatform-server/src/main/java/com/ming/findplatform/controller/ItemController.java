@@ -10,33 +10,58 @@ import java.util.List;
 
 /**
  * @ClassName :ItemController
- * @Description :
+ * @Description :物品部分的controller
  * @Author :Mox
  * @Date :2021/11/19 10:07
- * @Version : v1.2.1 接口版本v1
+ * @Version : v1.3 接口版本v1
  **/
 
+/**
+ * 响应的请求域为：/item
+ * 查[获取数据]的使用方法一律为：get
+ * 增、删、改的使用方法为：post
+ */
 @RestController
 public class ItemController {
     @Resource(name = "item")
     private ItemService itemService;
 
+    /**
+     * @Description 插入1条物品数据
+     * @param item
+     * @return int i1
+     */
     @PostMapping("/item/v1/addItem")
     public int addItem(@RequestBody Item item) {
         return itemService.addItem(item);
     }
 
+    /**
+     * @Description 更新1条物品数据
+     * @param item
+     * @return int i2
+     */
     @PostMapping("/item/v1/updateItem")
     public int updateAuth(@RequestBody Item item) {
         return itemService.updateItem(item);
     }
 
+    /**
+     * @Description ID删除1条物品数据
+     * @param id
+     * @return int i3
+     */
     @PostMapping(value = "/item/v1/deleteItem/{item_id}")
     public int deleteUserById(@PathVariable(name = "item_id") String id) {
         // 删除数据
         return itemService.deleteItemById(id);
     }
 
+    /**
+     * @Description ID查询1条物品数据
+     * @param id
+     * @return Item item1
+     */
     @GetMapping(value = "/item/v1/queryItem/id")
     public Item getItemById(@RequestParam(value = "item_id") String id) {
         // 查询单条数据
@@ -44,6 +69,11 @@ public class ItemController {
         return item;
     }
 
+    /**
+     * @Description Tag查询所有Tag物品数据
+     * @param tag
+     * @return item[] items
+     */
     @GetMapping(value = "/item/v1/queryItem/tag")
     public List<Item> getItemByTag(@RequestParam(value = "tag") String tag) {
         // 查询单条数据
@@ -51,6 +81,10 @@ public class ItemController {
         return items;
     }
 
+    /**
+     * @Description 查询所有物品数据
+     * @return item[] items
+     */
     @GetMapping("/item/v1/allItem")
     public List<Item> getAllItem() {
         // 查询多条数据

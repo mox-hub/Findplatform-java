@@ -12,17 +12,21 @@ import javax.annotation.Resource;
 
 /**
  * @ClassName :ImgController
- * @Description :七牛云响应token的发放
+ * @Description :七牛云响应token的发放，与python后台的图片识别链接
  * @Author :Mox
  * @Date :2021/11/15 17:51
  * @Version : v1.1 接口版本v1
  **/
 
+/**
+ * 响应的请求域为：/img
+ * 查[获取数据]的使用方法一律为：get
+ * 增、删、改的使用方法为：post
+ */
 @RestController
 public class ImgController {
     @Resource(name = "http")
     private HttpService httpService;
-
     @RequestMapping(value = "/img/v1/getToken", method = RequestMethod.GET)
     public QiNiu getToken() {
         QiNiu qiNiu = new QiNiu();
@@ -39,8 +43,14 @@ public class ImgController {
         qiNiu.setUptoken(upToken);
         return qiNiu;
     };
+
+    /**
+     * @Description 从 python 后台获取图片识别结果
+     * @param imgUrl
+     * @return String strBody
+     */
     @GetMapping("/img/v1/getItemInfo")
-    public String getItemInfo(@RequestParam(value = "imgUrl")String url) {
-        return httpService.getItemInfo(url);
+    public String getItemInfo(@RequestParam(value = "imgUrl")String imgUrl) {
+        return httpService.getItemInfo(imgUrl);
     }
 }

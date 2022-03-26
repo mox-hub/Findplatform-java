@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ming</groupId>
     <artifactId>findplatform</artifactId>
-    <version>0.3.0</version>
+    <version>0.4.1</version>
     <name>findplatform-server</name>
     <description>find platform of hfut-cs group</description>
     <packaging>jar</packaging>
@@ -134,32 +134,7 @@
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
 
-        <!--   TODO：resources这部分在complete和run时需要注释掉     -->
-<!--        <resources>-->
-<!--            &lt;!&ndash; 把src/main/resources目录下所有的文件拷贝到conf目录中 &ndash;&gt;-->
-<!--            <resource>-->
-<!--                <directory>src/main/resources</directory>-->
-<!--                <targetPath>${project.build.directory}/conf</targetPath>-->
-<!--            </resource>-->
-<!--            &lt;!&ndash; 把lib目录下所有的文件拷贝到lib目录中-->
-<!--            （可能有些jar包没有办法在maven中找到，需要放在lib目录中） &ndash;&gt;-->
-<!--            <resource>-->
-<!--                <directory>lib</directory>-->
-<!--                <targetPath>${project.build.directory}/lib</targetPath>-->
-<!--            </resource>-->
-<!--            &lt;!&ndash; 把放在根目录下的脚本文件.sh,.bat拷贝到bin目录中 &ndash;&gt;-->
-<!--            <resource>-->
-<!--                <directory>.</directory>-->
-<!--                <includes>-->
-<!--                    <include>**/*.sh</include>-->
-<!--                    <include>**/*.bat</include>-->
-<!--                </includes>-->
-<!--                <targetPath>${project.build.directory}/bin</targetPath>-->
-<!--            </resource>-->
-<!--        </resources>-->
-
         <plugins>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -170,7 +145,6 @@
                     <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>

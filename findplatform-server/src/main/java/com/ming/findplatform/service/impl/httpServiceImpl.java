@@ -14,16 +14,22 @@ import java.net.Socket;
 
 /**
  * @ClassName :httpServiceImpl
- * @Description :
+ * @Description :与python后台通信部分的httpService实现
  * @Author :Mox
  * @Date :2022/2/28 10:27
  * @Version : v1.0
  **/
 
+//TODO:该部分仍未验证与python的链接，在0.6.0前完成
 @Service("http")
 public class httpServiceImpl implements HttpService {
     RestTemplate restTemplate = new RestTemplate();
 
+    /**
+     * @Description 从 python 后台获取图片识别结果
+     * @param imgUrl
+     * @return String strBody
+     */
     @Override
     public String getItemInfo(String imgUrl) {
         String url = "http://127.0.0.1:9011?imgUrl="+imgUrl;

@@ -5,7 +5,7 @@ package com.ming.findplatform.model;
  * @Description :用户数据的实体类
  * @Author :Mox
  * @Date :2021/11/14 17:02
- * @Version : v2.0
+ * @Version : v3.0
  * v2.0新添加phone_number
  **/
 
@@ -14,7 +14,7 @@ public class User {
     private String id;
     private String username;
     private String password;
-    private Integer age;
+    private String college;
     private String phoneNumber;
 
     public String getId() {
@@ -41,12 +41,12 @@ public class User {
         this.password = password;
     }
 
-    public Integer getAge() {
-        return age;
+    public String getCollege() {
+        return college;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
+    public void setCollege(String college) {
+        this.college = college;
     }
 
     public String getPhoneNumber() {
@@ -63,7 +63,7 @@ public class User {
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", age=" + age +
+                ", college='" + college + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 '}';
     }

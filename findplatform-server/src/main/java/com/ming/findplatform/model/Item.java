@@ -7,7 +7,7 @@ import java.sql.Date;
  * @Description :item_list对应实体类
  * @Author :Mox
  * @Date :2021/11/19 10:02
- * @Version : v1.0
+ * @Version : v2.0
  **/
 
 public class Item {
