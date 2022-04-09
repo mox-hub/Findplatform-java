@@ -3,13 +3,10 @@ package com.ming.findplatform.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.ming.findplatform.model.Item;
 import com.ming.findplatform.service.HttpService;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.io.*;
 import java.net.Socket;
 
 /**
@@ -24,7 +21,7 @@ import java.net.Socket;
 @Service("http")
 public class httpServiceImpl implements HttpService {
     RestTemplate restTemplate = new RestTemplate();
-
+    
     /**
      * @Description 从 python 后台获取图片识别结果
      * @param imgUrl
@@ -32,13 +29,29 @@ public class httpServiceImpl implements HttpService {
      */
     @Override
     public String getItemInfo(String imgUrl) {
-        String url = "http://127.0.0.1:9011?imgUrl="+imgUrl;
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        HttpEntity<String> entity = new HttpEntity<String>(headers);
-        String strBody = restTemplate.exchange(url, HttpMethod.GET, entity,String.class).getBody();
-        Item itemResponse = JSONObject.parseObject(strBody,Item.class);
+        String serverName = "127.0.0.1";    //address
+        int port = 9011;    //port
+        String result = null;
+        try {
+            System.out.println("连接到主机：" + serverName + " ，端口号：" + port);
+            Socket client = new Socket(serverName, port);   //创建一个socket类
+            System.out.println("远程主机地址：" + client.getRemoteSocketAddress());
+            OutputStream outToServer = client.getOutputStream();
+            DataOutputStream out = new DataOutputStream(outToServer);
+            out.writeUTF(imgUrl + client.getLocalSocketAddress());
+            InputStream inFromServer = client.getInputStream();
 
-        return strBody;
+            BufferedReader inRead = new BufferedReader(new InputStreamReader(inFromServer));
+            result = inRead.readLine(); // result里存放识别结果
+            System.out.println("服务器响应" + result);
+
+//            DataInputStream in = new DataInputStream(inFromServer);
+//            System.out.println(in.);
+//            System.out.println("服务器响应： " + in.readUTF());
+            client.close();
+        }catch(IOException e)        {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

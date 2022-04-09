@@ -2,7 +2,6 @@ package com.ming.findplatform.controller;
 
 import com.ming.findplatform.model.Item;
 import com.ming.findplatform.service.CollectService;
-import com.ming.findplatform.service.ItemService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

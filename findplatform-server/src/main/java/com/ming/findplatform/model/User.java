@@ -12,10 +12,28 @@ package com.ming.findplatform.model;
 //TODO:解决phoneNumber为null的问题
 public class User {
     private String id;
+    private String openid;
+    private String avatarUrl;
     private String username;
     private String password;
     private String college;
     private String phoneNumber;
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+    public String getAvatarUrl() {
+        return avatarUrl;
+    }
+
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
 
     public String getId() {
         return id;
@@ -61,6 +79,8 @@ public class User {
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
+                ", openid='" + openid + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", college='" + college + '\'' +
