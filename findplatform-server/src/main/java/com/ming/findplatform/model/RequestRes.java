@@ -8,7 +8,7 @@ package com.ming.findplatform.model;
  * @Version : v1.0
  **/
 
-public class WxRequestRes {
+public class RequestRes {
     int code;
     String msg;
 

@@ -11,7 +11,7 @@ import java.util.List;
  * @Description :用户部分的controller
  * @Author :Mox
  * @Date :2021/11/14 17:25
- * @Version : v1.2.1 接口版本v1
+ * @Version : v2.0.0 接口版本v1
  **/
 
 /**
@@ -25,6 +25,10 @@ public class UserController {
     @Resource(name = "user")
     private UserService userService;
 
+    @GetMapping("/usr/v2/newUserId")
+    public String newUserId() {
+        return userService.newUserId();
+    }
     /**
      * @Description 插入1条用户数据
      * @param user
@@ -33,16 +37,6 @@ public class UserController {
     @PostMapping("/usr/v1/addUser")
     public int addUser(@RequestBody User user) {
         return userService.addUser(user);
-    }
-
-    /**
-     * @Description 更新1条用户数据
-     * @param user
-     * @return int
-     */
-    @PostMapping("/usr/v1/updateUser")
-    public int updateUser(@RequestBody User user) {
-        return userService.updateUser(user);
     }
 
     /**
@@ -56,14 +50,35 @@ public class UserController {
     }
 
     /**
+     * @Description 更新1条用户数据
+     * @param user
+     * @return int
+     */
+    @PostMapping("/usr/v1/updateUser")
+    public int updateUser(@RequestBody User user) {
+        return userService.updateUser(user);
+    }
+
+    /**
+     * @Description openID查询1条用户数据
+     * @param openid
+     * @return User user
+     */
+    @GetMapping(value = "/usr/v1/queryUser/openid")
+    public User getUserByOpenId(@RequestParam(value = "openid") String openid) {
+        User user = userService.getUserByOpenId(openid);
+        return user;
+    }
+
+    /**
      * @Description ID查询1条用户数据
      * @param id
      * @return User user
      */
     @GetMapping(value = "/usr/v1/queryUser")
     public User getUserById(@RequestParam(value = "id") String id) {
-        User user4 = userService.getUserById(id);
-        return user4;
+        User user = userService.getUserById(id);
+        return user;
     }
 
     /**
@@ -75,4 +90,17 @@ public class UserController {
         List<User> users = userService.getAllUser();
         return users;
     }
+
+    /**
+     * @Description openID查询1条用户数据
+     * @param openid
+     * @return User user
+     */
+    @GetMapping(value = "/usr/v2/queryUser/openid")
+    public Object getUserByOpenIdv2(@RequestParam(value = "openid") String openid) {
+        Object res = userService.getUserByOpenIdv2(openid);
+        return res;
+    }
+
+
 }

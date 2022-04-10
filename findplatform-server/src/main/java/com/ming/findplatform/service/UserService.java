@@ -15,19 +15,14 @@ import java.util.List;
 
 public interface UserService {
 
+    String newUserId();
+
     /**
      * @Description 插入1条用户数据
      * @param user
      * @return int
      */
     int addUser(User user);
-
-    /**
-     * @Description 更新1条用户数据
-     * @param user
-     * @return int
-     */
-    int updateUser(User user);
 
     /**
      * @Description ID删除1条用户数据
@@ -37,6 +32,13 @@ public interface UserService {
     int deleteUserById(String id);
 
     /**
+     * @Description 更新1条用户数据
+     * @param user
+     * @return int
+     */
+    int updateUser(User user);
+
+    /**
      * @Description ID查询1条用户数据
      * @param id
      * @return User user
@@ -44,8 +46,17 @@ public interface UserService {
     User getUserById(String id);
 
     /**
+     * @Description openID查询1条用户数据
+     * @param openid
+     * @return User user
+     */
+    User getUserByOpenId(String openid);
+
+    /**
      * @Description 查询所有用户数据
      * @return User users
      */
     List<User> getAllUser();
+
+    Object getUserByOpenIdv2(String openid);
 }

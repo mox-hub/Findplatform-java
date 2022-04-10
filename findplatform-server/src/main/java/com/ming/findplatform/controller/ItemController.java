@@ -25,6 +25,15 @@ import java.util.List;
 public class ItemController {
     @Resource(name = "item")
     private ItemService itemService;
+    /**
+     * @Description 获取新生成的物品ID
+     * @Method GET
+     * @return id
+     */
+    @GetMapping("/item/v2/newItemId")
+    public String newItemId() {
+        return itemService.newItemId();
+    }
 
     /**
      * @Description 插入1条物品数据

@@ -10,7 +10,7 @@ import java.util.List;
  * @Description :用户部分的mapper
  * @Author :Mox
  * @Date :2021/11/14 17:40
- * @Version : v2.0
+ * @Version : v3.0
  **/
 
 @Mapper
@@ -42,6 +42,13 @@ public interface UserMapper {
      * @return User user
      */
     User getUserById(String id);
+
+    /**
+     * @Description openID查询1条用户数据
+     * @param openid
+     * @return User user
+     */
+    User getUserByOpenId(String openid);
 
     /**
      * @Description 查询所有用户数据

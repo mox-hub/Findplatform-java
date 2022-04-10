@@ -27,6 +27,11 @@ import javax.annotation.Resource;
 public class ImgController {
     @Resource(name = "http")
     private HttpService httpService;
+
+    /**
+     * @Description 从 七牛云 后台获取图片链接
+     * @return String qiNiu
+     */
     @RequestMapping(value = "/img/v1/getToken", method = RequestMethod.GET)
     public QiNiu getToken() {
         QiNiu qiNiu = new QiNiu();

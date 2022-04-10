@@ -27,9 +27,9 @@ public class CollectServiceImpl implements CollectService {
      */
     @Override
     public int addItem(Item item) {
-        int i1 = itemMapper.addItem(item);
-        System.out.println("[findPlatform] CollectService::插入一条收藏物品数据 >>>" + i1);
-        return i1;
+        int info = itemMapper.addItem(item);
+        System.out.println("[findPlatform] CollectService::插入一条收藏物品数据 >>>" + info);
+        return info;
     }
     /**
      * @Description ID删除1条收藏物品数据
@@ -38,9 +38,9 @@ public class CollectServiceImpl implements CollectService {
      */
     @Override
     public int deleteItemById(String id) {
-        int i3 = itemMapper.deleteItemById(id);
-        System.out.println("[findPlatform] CollectService::删除一条收藏物品数据 >>>" + i3);
-        return i3;
+        int info = itemMapper.deleteItemById(id);
+        System.out.println("[findPlatform] CollectService::删除一条收藏物品数据 >>>" + info);
+        return info;
     }
     /**
      * @Description Tag查询所有Tag收藏物品数据
@@ -59,8 +59,8 @@ public class CollectServiceImpl implements CollectService {
      */
     @Override
     public List<Item> getAllItem() {
-        List<Item> items1 = itemMapper.getAllItem();
-        System.out.println("[findPlatform] CollectService::查询所有收藏物品数据 >>>" + items1);
-        return items1;
+        List<Item> items = itemMapper.getAllItem();
+        System.out.println("[findPlatform] CollectService::查询所有收藏物品数据 >>>" + items);
+        return items;
     }
 }

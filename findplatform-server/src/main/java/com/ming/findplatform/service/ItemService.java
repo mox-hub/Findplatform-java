@@ -12,6 +12,8 @@ import java.util.List;
  **/
 public interface ItemService {
 
+    String newItemId();
+
     /**
      * @Description 插入1条物品数据
      * @param item
