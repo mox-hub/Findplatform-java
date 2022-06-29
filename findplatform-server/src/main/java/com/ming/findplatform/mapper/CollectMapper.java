@@ -1,9 +1,15 @@
 package com.ming.findplatform.mapper;
 
-import com.ming.findplatform.model.Item;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.ming.findplatform.model.Collect;
+import com.ming.findplatform.model.VO.CollectVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 
 import java.util.List;
+
 
 /**
  * @InterfaceName :CollectMapper
@@ -14,6 +20,10 @@ import java.util.List;
  **/
 
 @Mapper
-public interface CollectMapper {
+public interface CollectMapper extends BaseMapper<Collect> {
+    @Select("SELECT collect.*,item_list.* FROM collect,item_list WHERE collect.item_id=item_list.item_id")
+    List<CollectVO> getAllCollectVO();
 
+    @Select("SELECT collect.*,item_list.* FROM collect,item_list WHERE collect.item_id=item_list.item_id AND "+"collect.collect_uid= #{uid}")
+    List<CollectVO> getCollectByUid( @Param("uid")String uid);
 }

@@ -1,13 +1,18 @@
 package com.ming.findplatform.controller;
 
 import com.ming.findplatform.model.Item;
-import com.ming.findplatform.model.User;
 import com.ming.findplatform.service.ItemService;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
+
+/**
+ * 响应的请求域为：/item
+ * 查[获取数据]的使用方法一律为：get
+ * 增、删、改的使用方法为：post
+ */
 
 /**
  * @ClassName :ItemController
@@ -17,22 +22,19 @@ import java.util.List;
  * @Version : v1.3 接口版本v1
  **/
 
-/**
- * 响应的请求域为：/item
- * 查[获取数据]的使用方法一律为：get
- * 增、删、改的使用方法为：post
- */
 @Api(tags = "[Item]物品管理")
 @RestController
+@RequestMapping("/item")
 public class ItemController {
     @Resource(name = "item")
     private ItemService itemService;
+
     /**
      * @Description 获取新生成的物品ID
      * @Method GET
      * @return id
      */
-    @GetMapping("/item/v2/newItemId")
+    @GetMapping("/v2/newItemId")
     public String newItemId() {
         return itemService.newItemId();
     }
@@ -42,7 +44,7 @@ public class ItemController {
      * @param item
      * @return int i1
      */
-    @PostMapping("/item/v1/addItem")
+    @PostMapping("/v1/addItem")
     public int addItem(@RequestBody Item item) {
         return itemService.addItem(item);
     }
@@ -52,7 +54,7 @@ public class ItemController {
      * @param item
      * @return int i2
      */
-    @PostMapping("/item/v1/updateItem")
+    @PostMapping("/v1/updateItem")
     public int updateAuth(@RequestBody Item item) {
         return itemService.updateItem(item);
     }
@@ -62,7 +64,7 @@ public class ItemController {
      * @param id
      * @return int i3
      */
-    @PostMapping(value = "/item/v1/deleteItem/{item_id}")
+    @PostMapping(value = "/v1/deleteItem/{item_id}")
     public int deleteUserById(@PathVariable(name = "item_id") String id) {
         // 删除数据
         return itemService.deleteItemById(id);
@@ -73,7 +75,7 @@ public class ItemController {
      * @param id
      * @return Item item1
      */
-    @GetMapping(value = "/item/v1/queryItem/id")
+    @GetMapping(value = "/v1/queryItem/id")
     public Item getItemById(@RequestParam(value = "item_id") String id) {
         // 查询单条数据
         Item item = itemService.getItemById(id);
@@ -85,7 +87,7 @@ public class ItemController {
      * @param tag
      * @return item[] items
      */
-    @GetMapping(value = "/item/v1/queryItem/tag")
+    @GetMapping(value = "/v1/queryItem/tag")
     public List<Item> getItemByTag(@RequestParam(value = "tag") String tag) {
         // 查询单条数据
         List<Item> items = itemService.getItemByTag(tag);
@@ -96,10 +98,11 @@ public class ItemController {
      * @Description 查询所有物品数据
      * @return item[] items
      */
-    @GetMapping("/item/v1/allItem")
+    @GetMapping("/v1/allItem")
     public List<Item> getAllItem() {
         // 查询多条数据
         List<Item> items = itemService.getAllItem();
         return items;
     }
 }
+

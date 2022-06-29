@@ -26,6 +26,7 @@ import javax.annotation.Resource;
  */
 @Api(tags = "[Img]图像处理")
 @RestController
+@RequestMapping("/img")
 public class ImgController {
     @Resource(name = "http")
     private HttpService httpService;
@@ -34,7 +35,7 @@ public class ImgController {
      * @Description 从 七牛云 后台获取图片链接
      * @return String qiNiu
      */
-    @RequestMapping(value = "/img/v1/getToken", method = RequestMethod.GET)
+    @RequestMapping(value = "/v1/getToken", method = RequestMethod.GET)
     public QiNiu getToken() {
         QiNiu qiNiu = new QiNiu();
         // 七牛云图床的秘钥
@@ -56,7 +57,7 @@ public class ImgController {
      * @param imgUrl
      * @return String strBody
      */
-    @GetMapping("/img/v1/getItemInfo")
+    @GetMapping("/v1/getItemInfo")
     public String getItemInfo(@RequestParam(value = "imgUrl")String imgUrl) {
         return httpService.getItemInfo(imgUrl);
     }

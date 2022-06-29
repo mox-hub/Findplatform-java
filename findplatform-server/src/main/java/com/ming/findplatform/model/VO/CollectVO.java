@@ -1,21 +1,18 @@
-package com.ming.findplatform.model;
-
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+package com.ming.findplatform.model.VO;
 
 import java.sql.Date;
 
 /**
- * @ClassName :Item
- * @Description :item_list对应实体类
+ * @ClassName :CollectVO
+ * @Description :
  * @Author :Mox
- * @Date :2021/11/19 10:02
- * @Version : v2.0
+ * @Date :2022/6/29 20:24
+ * @Version : v1.0
  **/
-@TableName(value = "item_list")
-public class Item {
-    @TableId(type = IdType.INPUT)
+
+public class CollectVO {
+    private String collectId;
+    private String collectUid;
     private String itemId;
     private String imgUrl;
     private String tagId;
@@ -26,6 +23,22 @@ public class Item {
     private String userId;
     private String itemName;
     private String itemInfo;
+
+    public String getCollectId() {
+        return collectId;
+    }
+
+    public void setCollectId(String collectId) {
+        this.collectId = collectId;
+    }
+
+    public String getCollectUid() {
+        return collectUid;
+    }
+
+    public void setCollectUid(String collectUid) {
+        this.collectUid = collectUid;
+    }
 
     public String getItemId() {
         return itemId;
@@ -103,21 +116,25 @@ public class Item {
         return itemInfo;
     }
 
-    public void setItemInfo(String itemInfo) { this.itemInfo = itemInfo; }
+    public void setItemInfo(String itemInfo) {
+        this.itemInfo = itemInfo;
+    }
 
     @Override
     public String toString() {
-        return "Item{" +
-                "itemId='" + itemId + '\'' +
+        return "CollectVO{" +
+                "collectId='" + collectId + '\'' +
+                ", collectUid='" + collectUid + '\'' +
+                ", itemId='" + itemId + '\'' +
                 ", imgUrl='" + imgUrl + '\'' +
-                ", tag='" + tagId + '\'' +
+                ", tagId='" + tagId + '\'' +
                 ", state=" + state +
                 ", pickLocation='" + pickLocation + '\'' +
                 ", placement='" + placement + '\'' +
                 ", pickTime=" + pickTime +
                 ", userId='" + userId + '\'' +
-                ", item_name='" + itemName + '\'' +
-                ", item_info='" + itemInfo + '\'' +
+                ", itemName='" + itemName + '\'' +
+                ", itemInfo='" + itemInfo + '\'' +
                 '}';
     }
 }

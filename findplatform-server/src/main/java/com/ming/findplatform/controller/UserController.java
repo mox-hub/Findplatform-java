@@ -25,12 +25,13 @@ import java.util.List;
  */
 @Api(tags = "[User]用户管理")
 @RestController
+@RequestMapping("/usr")
 public class UserController {
 
     @Resource(name = "user")
     private UserService userService;
 
-    @GetMapping("/usr/v2/newUserId")
+    @GetMapping("/v2/newUserId")
     @ApiOperation("[newUserId]获取新的用户id")
     public String newUserId() {
         return userService.newUserId();
@@ -42,7 +43,7 @@ public class UserController {
      * @return int
      */
 
-    @PostMapping("/usr/v1/addUser")
+    @PostMapping("/v1/addUser")
     @ApiOperation("[addUser]添加新的用户")
     public int addUser(@RequestBody User user) {
         return userService.addUser(user);
@@ -53,7 +54,7 @@ public class UserController {
      * @param id
      * @return int
      */
-    @PostMapping(value = "/usr/v1/deleteUser/{id}")
+    @PostMapping(value = "/v1/deleteUser/{id}")
     @ApiOperation("[addUser]添加新的用户")
     @ApiImplicitParam(name = "id", value = "用户id", defaultValue = "1111", required = true)
     public int deleteUserById(@PathVariable(name = "id") String id) {
@@ -65,7 +66,7 @@ public class UserController {
      * @param user
      * @return int
      */
-    @PostMapping("/usr/v1/updateUser")
+    @PostMapping("/v1/updateUser")
     @ApiOperation("[updateUser]更新用户数据")
     public int updateUser(@RequestBody User user) {
         return userService.updateUser(user);
@@ -76,7 +77,7 @@ public class UserController {
      * @param openid
      * @return User user
      */
-    @GetMapping(value = "/usr/v1/queryUser/openid")
+    @GetMapping(value = "/v1/queryUser/openid")
     @ApiOperation("[getUserByOpenId]通过Openid查询用户")
     @ApiImplicitParam(name = "openid", value = "用户openid", defaultValue = "1111", required = true)
     public User getUserByOpenId(@RequestParam(value = "openid") String openid) {
@@ -89,7 +90,7 @@ public class UserController {
      * @param id
      * @return User user
      */
-    @GetMapping(value = "/usr/v1/queryUser")
+    @GetMapping(value = "/v1/queryUser")
     @ApiOperation("[getUserById]通过id查询用户")
     @ApiImplicitParam(name = "id", value = "用户id", defaultValue = "1111", required = true)
     public User getUserById(@RequestParam(value = "id") String id) {
@@ -101,7 +102,7 @@ public class UserController {
      * @Description 查询所有用户数据
      * @return User users
      */
-    @GetMapping("/usr/v1/allUser")
+    @GetMapping("/v1/allUser")
     @ApiOperation("[getAllUser]查询用户列表")
     public List<User> getAllUser() {
         List<User> users = userService.getAllUser();
@@ -113,7 +114,7 @@ public class UserController {
      * @param openid
      * @return User user
      */
-    @GetMapping(value = "/usr/v2/queryUser/openid")
+    @GetMapping(value = "/v2/queryUser/openid")
     @ApiOperation("[getUserByOpenIdv2]查询用户列表")
     @ApiImplicitParam(name = "openid", value = "用户openid", defaultValue = "1111", required = true)
     public Object getUserByOpenIdv2(@RequestParam(value = "openid") String openid) {

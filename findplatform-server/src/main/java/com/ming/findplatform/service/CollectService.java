@@ -1,6 +1,8 @@
 package com.ming.findplatform.service;
 
+import com.ming.findplatform.model.Collect;
 import com.ming.findplatform.model.Item;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -40,5 +42,11 @@ public interface CollectService {
      */
     List<Item> getAllItem();
 
+    Object addCollect(Collect collect);
 
+    Object deleteCollectById(String id);
+
+    Object getCollectByUId(String uid);
+
+    Object getAllCollect();
 }
