@@ -8,6 +8,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -25,8 +27,11 @@ import static com.ming.findplatform.config.WXConfig.*;
  **/
 //TODO:该部分仍未验证与python的链接，在0.6.0前完成
 @Service("http")
-public class httpServiceImpl implements HttpService {
-    
+public class HttpServiceImpl implements HttpService {
+
+    //  配置logger
+    private final static Logger logger = LoggerFactory.getLogger(HttpServiceImpl.class);
+
     /**
      * @Description 从 python 后台获取图片识别结果
      * @param imgUrl
@@ -38,10 +43,10 @@ public class httpServiceImpl implements HttpService {
         int port = 9011;    //port
         String result = null;
         try {
-            System.out.println(imgUrl);
-            System.out.println("[findPlatform] httpService::连接到主机 >>>" + serverName + " ，端口号：" + port);
+            logger.info(imgUrl);
+            logger.info("[findPlatform] httpService::连接到主机 >>>" + serverName + " ，端口号：" + port);
             Socket client = new Socket(serverName, port);   //创建一个socket类
-            System.out.println("[findPlatform] httpService::远程主机地址 >>>" + client.getRemoteSocketAddress());
+            logger.info("[findPlatform] httpService::远程主机地址 >>>" + client.getRemoteSocketAddress());
             OutputStream outToServer = client.getOutputStream();
             DataOutputStream out = new DataOutputStream(outToServer);
             out.writeUTF(imgUrl);
@@ -49,11 +54,11 @@ public class httpServiceImpl implements HttpService {
 
             BufferedReader inRead = new BufferedReader(new InputStreamReader(inFromServer));
             result = inRead.readLine(); // result里存放识别结果
-            System.out.println("[findPlatform] httpService::服务器响应数据 >>>" + result);
+            logger.info("[findPlatform] httpService::服务器响应数据 >>>" + result);
             client.close();
 
         }catch(IOException e) {
-            e.printStackTrace();
+            logger.warn(String.valueOf(e));
         }
         return result;
     }
@@ -114,7 +119,7 @@ public class httpServiceImpl implements HttpService {
             return result;
 
         } catch (IOException e) {
-            System.out.println("encryptedData，decode失败！"+ e);
+            logger.warn("encryptedData，decode失败！"+ e);
             res.setCode(-1);
             res.setMsg("获取sessionkey失败！");
             return res;
@@ -160,7 +165,7 @@ public class httpServiceImpl implements HttpService {
         } catch (UnsupportedEncodingException e) {
             res.setCode(-1);
             res.setMsg("encryptedData，decode失败！");
-            System.out.println("[findPlatform] httpService::encryptedData.decode失败！"+ e);
+            logger.warn("[findPlatform] httpService::encryptedData.decode失败！"+ e);
             return res;
         }
         return WechatDecryptDataUtil.decryptData(encryptedData, sessionKey, iv);

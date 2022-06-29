@@ -1,5 +1,9 @@
 package com.ming.findplatform.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.sql.Date;
 
 /**
@@ -9,8 +13,9 @@ import java.sql.Date;
  * @Date :2021/11/19 10:02
  * @Version : v2.0
  **/
-
+@TableName(value = "item_list")
 public class Item {
+    @TableId(type = IdType.INPUT)
     private String itemId;
     private String imgUrl;
     private String tag;

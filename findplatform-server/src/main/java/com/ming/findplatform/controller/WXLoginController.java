@@ -2,6 +2,7 @@ package com.ming.findplatform.controller;
 
 import com.ming.findplatform.service.HttpService;
 
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import javax.annotation.Resource;
  * @Version : v1.0
  **/
 
+@Api(tags = "[wxLogin]微信登录管理")
 @RestController
 public class WXLoginController {
 

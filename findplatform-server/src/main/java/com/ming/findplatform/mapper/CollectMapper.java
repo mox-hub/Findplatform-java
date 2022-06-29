@@ -15,31 +15,5 @@ import java.util.List;
 
 @Mapper
 public interface CollectMapper {
-    /**
-     * @Description 插入1条物品数据
-     * @param item
-     * @return int i1
-     */
-    int addItem(Item item);
-
-    /**
-     * @Description ID删除1条物品数据
-     * @param itemId
-     * @return int i3
-     */
-    int deleteItemById(String itemId);
-
-    /**
-     * @Description Tag查询所有Tag物品数据
-     * @param tag
-     * @return item[] items
-     */
-    List<Item> getItemByTag(String tag);
-
-    /**
-     * @Description 查询所有物品数据
-     * @return item[] items
-     */
-    List<Item> getAllItem();
 
 }

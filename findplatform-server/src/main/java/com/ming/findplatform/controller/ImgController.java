@@ -6,6 +6,7 @@ import com.ming.findplatform.service.HttpService;
 import com.ming.findplatform.service.ItemService;
 import com.qiniu.util.Auth;
 import com.qiniu.util.StringMap;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -23,6 +24,7 @@ import javax.annotation.Resource;
  * 查[获取数据]的使用方法一律为：get
  * 增、删、改的使用方法为：post
  */
+@Api(tags = "[Img]图像处理")
 @RestController
 public class ImgController {
     @Resource(name = "http")

@@ -1,10 +1,13 @@
 package com.ming.findplatform.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ming.findplatform.mapper.ItemMapper;
 import com.ming.findplatform.mapper.UserMapper;
 import com.ming.findplatform.model.Item;
 import com.ming.findplatform.model.User;
 import com.ming.findplatform.service.ItemService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,6 +28,9 @@ public class ItemServiceImpl implements ItemService {
     @Resource
     private ItemMapper itemMapper;
 
+    //  配置logger
+    private final static Logger logger = LoggerFactory.getLogger(ItemServiceImpl.class);
+
     /**
      * @Description 获取新生成的物品ID
      * @Method GET
@@ -39,7 +45,7 @@ public class ItemServiceImpl implements ItemService {
         //获取6位随机数
         int random=(int)((Math.random()+1)*1000);
         id=temp+random;
-        System.out.println("[findPlatform] ItemService::生成一条新的物品ID >>>" + id);
+        logger.info("[findPlatform] ItemService::生成一条新的物品ID >>>" + id);
         return id;
     }
 
@@ -50,20 +56,8 @@ public class ItemServiceImpl implements ItemService {
      */
     @Override
     public int addItem(Item item) {
-        int info = itemMapper.addItem(item);
-        System.out.println("[findPlatform] ItemService::插入1条物品数据 >>>" + info);
-        return info;
-    }
-
-    /**
-     * @Description 更新1条物品数据
-     * @param item
-     * @return int i2
-     */
-    @Override
-    public int updateItem(Item item) {
-        int info = itemMapper.updateItem(item);
-        System.out.println("[findPlatform] ItemService::更新1条物品数据 >>>" + info);
+        int info = itemMapper.insert(item);
+        logger.info("[findPlatform] ItemService::插入1条物品数据 >>>" + info);
         return info;
     }
 
@@ -74,8 +68,20 @@ public class ItemServiceImpl implements ItemService {
      */
     @Override
     public int deleteItemById(String id) {
-        int info = itemMapper.deleteItemById(id);
-        System.out.println("[findPlatform] ItemService::ID删除1条物品数据 >>>" + info);
+        int info = itemMapper.deleteById(id);
+        logger.info("[findPlatform] ItemService::ID删除1条物品数据 >>>" + info);
+        return info;
+    }
+
+    /**
+     * @Description 更新1条物品数据
+     * @param item
+     * @return int i2
+     */
+    @Override
+    public int updateItem(Item item) {
+        int info = itemMapper.updateById(item);
+        logger.info("[findPlatform] ItemService::更新1条物品数据 >>>" + info);
         return info;
     }
 
@@ -86,8 +92,8 @@ public class ItemServiceImpl implements ItemService {
      */
     @Override
     public Item getItemById(String id) {
-        Item item = itemMapper.getItemById(id);
-        System.out.println("[findPlatform] ItemService::ID查询1条物品数据 >>>" + item.toString());
+        Item item = itemMapper.selectById(id);
+        logger.info("[findPlatform] ItemService::ID查询1条物品数据 >>>" + item.toString());
         return item;
     }
 
@@ -98,8 +104,10 @@ public class ItemServiceImpl implements ItemService {
      */
     @Override
     public List<Item> getItemByTag(String tag) {
-        List<Item> items = itemMapper.getItemByTag(tag);
-        System.out.println("[findPlatform] ItemService::Tag查询所有Tag物品数据 >>>" + items);
+        QueryWrapper<Item> wrapper = new QueryWrapper<>();
+        wrapper.eq("tag",tag);
+        List<Item> items = itemMapper.selectList(wrapper);
+        logger.info("[findPlatform] ItemService::Tag查询所有Tag物品数据 >>>" + items);
         return items;
     }
 
@@ -109,8 +117,8 @@ public class ItemServiceImpl implements ItemService {
      */
     @Override
     public List<Item> getAllItem() {
-        List<Item> items = itemMapper.getAllItem();
-        System.out.println("[findPlatform] ItemService::查询所有物品数据 >>>" + items);
+        List<Item> items = itemMapper.selectList(null);
+        logger.info("[findPlatform] ItemService::查询所有物品数据 >>>" + items);
         return items;
     }
 }

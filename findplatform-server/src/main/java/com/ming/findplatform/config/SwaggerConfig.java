@@ -59,12 +59,13 @@ public class SwaggerConfig {
 
 
     //配置文档信息
+    //TODO:提交代码前记得更新api版本
     private ApiInfo apiInfo() {
         Contact contact = new Contact("莫晓", "http://www.moxhub.cn/", "dev_mox@163.com");
         return new ApiInfo(
                 "findPlatform Api文档", // 标题
                 "AI寻物，server端Swagger接口文档", // 描述
-                "v0.6.0", // 版本
+                "v0.7.0", // 版本
                 "http://www.foocode.cn/findplatform", // 组织链接
                 contact, // 联系人信息
                 "Apach 2.0 许可", // 许可

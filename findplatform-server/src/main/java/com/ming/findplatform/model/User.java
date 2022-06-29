@@ -1,5 +1,9 @@
 package com.ming.findplatform.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 /**
  * @ClassName :User
  * @Description :用户数据的实体类
@@ -10,7 +14,9 @@ package com.ming.findplatform.model;
  **/
 
 //TODO:解决phoneNumber为null的问题
+@TableName(value = "user")
 public class User {
+    @TableId(type = IdType.INPUT)
     private String id;
     private String openid;
     private String avatarUrl;

@@ -1,9 +1,12 @@
 package com.ming.findplatform.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.ming.findplatform.mapper.UserMapper;
 import com.ming.findplatform.model.Response;
 import com.ming.findplatform.model.User;
 import com.ming.findplatform.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,6 +27,11 @@ public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
 
+    //  配置logger
+    private final static Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
+    //v1版本接口
+
     /**
      * @Description 获取新生成的用户ID
      * @Method GET
@@ -38,7 +46,7 @@ public class UserServiceImpl implements UserService {
         //获取6位随机数
         int random=(int)((Math.random()+1)*100000);
         id=temp+random;
-        System.out.println("[findPlatform] UserService::生成一条新的用户ID >>>" + id);
+        logger.info("[findPlatform] UserService::生成一条新的用户ID >>>" + id);
         return id;
     }
 
@@ -49,8 +57,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public int addUser(User user){
-        int info = userMapper.addUser(user);
-        System.out.println("[findPlatform] UserService::插入1条用户数据 >>>" + info);
+        int info = userMapper.insert(user);
+        logger.info("[findPlatform] UserService::插入1条用户数据 >>>" + info);
         return info;
     }
 
@@ -62,8 +70,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public  int deleteUserById(String id){
         // 删除数据
-        int info = userMapper.deleteUserById(id);
-        System.out.println("[findPlatform] UserService::删除1条用户数据 >>>" + info);
+        int info = userMapper.deleteById(id);
+        logger.info("[findPlatform] UserService::删除1条用户数据 >>>" + info);
         return info;
     }
 
@@ -75,10 +83,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateUser(User user){
         // 修改数据
-        int info = userMapper.updateUser(user);
-        System.out.println(user.getId());
-        User user_after = userMapper.getUserById(user.getId());
-        System.out.println("[findPlatform] UserService::更新1条用户数据 >>>" + user_after);
+        int info = userMapper.updateById(user);
+        logger.info(user.getId());
+        User user_after = userMapper.selectById(user.getId());
+        logger.info("[findPlatform] UserService::更新1条用户数据 >>>" + user_after);
         return info;
     }
 
@@ -90,8 +98,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(String id){
         // 查询单条数据
-        User user = userMapper.getUserById(id);
-        System.out.println("[findPlatform] UserService::ID查询1条用户数据 >>>" + user.toString());
+        User user = userMapper.selectById(id);
+        logger.info("[findPlatform] UserService::ID查询1条用户数据 >>>" + user.toString());
         return user;
     }
 
@@ -103,23 +111,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByOpenId(String openid){
         // 查询单条数据
-        User user = userMapper.getUserByOpenId(openid);
-        System.out.println("[findPlatform] UserService::openID查询1条用户数据 >>>" + user.toString());
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("openid",openid);
+        User user = userMapper.selectOne(wrapper);
+        logger.info("[findPlatform] UserService::openID查询1条用户数据 >>>" + user.toString());
         return user;
-    }
-
-    @Override
-    public Object getUserByOpenIdv2(String openid){
-        // 查询单条数据
-        try {
-            User user = userMapper.getUserByOpenId(openid);
-            System.out.println("[findPlatform][v2版本] UserService::openID查询1条用户数据 >>>" + user.toString());
-            return new Response<>(user);
-        }catch (NullPointerException e) {
-            Response<Object> response = new Response<>(-1, "未查询到用户！");
-            System.out.println("[findPlatform][v2版本] UserService::openID查询1条用户数据 >>> 查询失败！"+ response);
-            return response;
-        }
     }
 
     /**
@@ -129,8 +125,26 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<User> getAllUser(){
-        List<User> users = userMapper.getAllUser();
-        System.out.println("[findPlatform] UserService::查询所有用户数据 >>>" + users);
+        List<User> users = userMapper.selectList(null);
+        logger.info("[findPlatform] UserService::查询所有用户数据 >>>" + users);
         return users;
+    }
+
+    //v2版本接口
+
+    @Override
+    public Object getUserByOpenIdv2(String openid){
+        // 查询单条数据
+        try {
+            QueryWrapper<User> wrapper = new QueryWrapper<>();
+            wrapper.eq("openid",openid);
+            User user = userMapper.selectOne(wrapper);
+            logger.info("[findPlatform][v2版本] UserService::openID查询1条用户数据 >>>" + user.toString());
+            return new Response<>(user);
+        }catch (NullPointerException e) {
+            Response<Object> response = new Response<>(-1, "未查询到用户！");
+            logger.warn("[findPlatform][v2版本] UserService::openID查询1条用户数据 >>> 查询失败！"+ response);
+            return response;
+        }
     }
 }

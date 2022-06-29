@@ -3,6 +3,7 @@ package com.ming.findplatform.controller;
 import com.ming.findplatform.model.Item;
 import com.ming.findplatform.model.User;
 import com.ming.findplatform.service.ItemService;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,6 +22,7 @@ import java.util.List;
  * 查[获取数据]的使用方法一律为：get
  * 增、删、改的使用方法为：post
  */
+@Api(tags = "[Item]物品管理")
 @RestController
 public class ItemController {
     @Resource(name = "item")

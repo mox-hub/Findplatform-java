@@ -1,5 +1,6 @@
 package com.ming.findplatform.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.ming.findplatform.model.User;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,45 +15,6 @@ import java.util.List;
  **/
 
 @Mapper
-public interface UserMapper {
-    /**
-     * @Description 插入1条用户数据
-     * @param user
-     * @return int
-     */
-    int addUser(User user);
+public interface UserMapper extends BaseMapper<User> {
 
-    /**
-     * @Description 更新1条用户数据
-     * @param user
-     * @return int
-     */
-    int updateUser(User user);
-
-    /**
-     * @Description ID删除1条用户数据
-     * @param id
-     * @return int
-     */
-    int deleteUserById(String id);
-
-    /**
-     * @Description ID查询1条用户数据
-     * @param id
-     * @return User user
-     */
-    User getUserById(String id);
-
-    /**
-     * @Description openID查询1条用户数据
-     * @param openid
-     * @return User user
-     */
-    User getUserByOpenId(String openid);
-
-    /**
-     * @Description 查询所有用户数据
-     * @return User users
-     */
-    List<User> getAllUser();
 }
